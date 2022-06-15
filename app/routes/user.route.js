@@ -1,12 +1,13 @@
-module.exports = (app) => {
-  const User = require("../controllers/user.controller.js");
+const r = require("express").Router();
+const User = require("../controllers/user.controller.js");
 
-  app.post("/create", User.create);
-  app.get("/get-all", User.findAll);
+r.post("/create", User.create);
+r.get("/get-all", User.findAll);
 
-  app.get("/user/:userId", User.findOne);
+r.get("/user/:userId", User.findOne);
 
 //   app.put("/user/:userId", User.update);
 
-  app.delete("/user/:userId", User.delete);
-};
+r.delete("/user/:userId", User.delete);
+
+module.exports = r;

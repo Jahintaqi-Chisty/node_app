@@ -1,6 +1,7 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
+const path = require("path");
 
 const app = express();
 
@@ -8,11 +9,8 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(bodyParser.json());
 
+app.set("views", path.join(__dirname, "app/views"));
 app.set("view engine", "ejs");
-
-app.get("/", (req, res) => {
-  res.json({ message: "Server is running :D" });
-});
 
 let PORT = 8080;
 
@@ -32,9 +30,12 @@ mongoose
   });
 
 // Defining Routes
-require("./app/routes/user.route.js")(app);
+const viewRouter = require("./app/routes/views.route");
+const apiRouter = require("./app/routes/user.route");
+
+app.use("/", viewRouter);
+app.use("/api", apiRouter);
 
 app.listen(PORT, () => {
   console.log(`Server is listening on port ${PORT}`);
 });
-
