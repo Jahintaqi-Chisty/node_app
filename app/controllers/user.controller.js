@@ -1,28 +1,30 @@
 const USER = require('../models/user.model.js');
 
-exports.create = (req, res)=>{
+exports.create = async (req, res)=>{
 
-    const user = new USER({
-            firstName : req.body.first_name,
-            lastName: req.body.last_name,
-            email: req.body.email
+    try{
+        if ( await USER.exists({'username':req.body.username})){
 
-    });
-
-    user.save()
-    .then(
-        (data)=>{
-            res.send(data);
+         throw Error("User Already exist!!")
         }
 
-    ).catch((err)=>{
-        messagae: err.message || "Some Error Occured!!"
-    });
+        const user = new USER(req.body)
+        await user.save()
+        res.send(user);
+     }
+
+    catch (err){
+        res.status(500).send({
+                message:
+                    err.message || "Some error occurred while retrieving messages.",
+            });
+    }
+
 };
 
 // Retrieve all messages from the database.
 exports.findAll = (req, res) => {
-    USER.find()
+    USER.find().populate('cloverConfig').populate('deviceLine')
       .then((data) => {
         res.send(data);
       })

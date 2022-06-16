@@ -32,9 +32,13 @@ mongoose
 // Defining Routes
 const viewRouter = require("./app/routes/views.route");
 const apiRouter = require("./app/routes/user.route");
+const CloverConfigRouter = require("./app/routes/colver.config.route");
+const DeviceLineRouter = require("./app/routes/device.line.route");
 
 app.use("/", viewRouter);
-app.use("/api", apiRouter);
+app.use("/api/user", apiRouter);
+app.use("/api/config", CloverConfigRouter);
+app.use("/api/device", DeviceLineRouter);
 
 app.listen(PORT, () => {
   console.log(`Server is listening on port ${PORT}`);
