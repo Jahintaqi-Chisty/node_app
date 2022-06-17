@@ -1,11 +1,11 @@
 const r = require("express").Router();
 
 r.get("/", function (_, res) {
-  res.render("pages");
+  res.render("");
 });
 
 r.get("/login", function (_, res) {
-  res.render("pages/login");
+  res.render("login");
 });
 
 module.exports = r;

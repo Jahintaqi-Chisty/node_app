@@ -2,4 +2,7 @@
 
 ## Add
 
-- 404 page
+- react view.
+- layout in react.
+- dummy auth views for login register forget and reset.
+- button for access token.

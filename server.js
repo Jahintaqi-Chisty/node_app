@@ -1,16 +1,21 @@
 const express = require("express");
-const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const path = require("path");
+const hbs = require("hbs");
+const logger = require("morgan");
 
 const app = express();
 
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
 
-app.use(bodyParser.json());
+hbs.registerPartials(path.join(__dirname, "app/views/partials"), (err) => {});
+// for (let helper in helpers) {
+//   hbs.registerHelper(helper, helpers[helper]);
+// }
 
 app.set("views", path.join(__dirname, "app/views"));
-app.set("view engine", "ejs");
+app.set("view engine", "hbs");
 
 let PORT = 8080;
 
@@ -30,12 +35,12 @@ mongoose
   });
 
 // Defining Routes
-const viewRouter = require("./app/routes/views.route");
+// const viewRouter = require("./app/routes/views.route");
 const apiRouter = require("./app/routes/user.route");
 
-app.use("/", viewRouter);
+// app.use("/", viewRouter);
 app.use("/api", apiRouter);
-app.use("*", function (req, res) {
+app.use("*", function (_, res) {
   console.log("404ing");
   res.render("404");
 });
