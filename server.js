@@ -44,10 +44,10 @@ const DeviceLineRouter = require("./app/routes/device.line.route");
 app.use("/api/user", apiRouter);
 app.use("/api/config", CloverConfigRouter);
 app.use("/api/device", DeviceLineRouter);
-app.use("*", function (req, res) {
-  console.log("404ing");
-  res.render("404");
-});
+// app.use("*", function (req, res) {
+//   console.log("404ing");
+//   res.render("404");
+// });
 
 app.listen(PORT, () => {
   console.log(`Server is listening on port ${PORT}`);
