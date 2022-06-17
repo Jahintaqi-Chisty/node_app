@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const validator = require('validator');
+const {Schema} = require("mongoose");
 
 const CloverConfigSchema = mongoose.Schema({
 
@@ -16,7 +17,7 @@ const CloverConfigSchema = mongoose.Schema({
         required: true,
         default: "https://www.clover.com"
     },
-    regions: {
+    cloverRegions: {
         type: String,
         required: true,
         enum: ['US','CANADA']
@@ -46,6 +47,17 @@ const CloverConfigSchema = mongoose.Schema({
         required: true,
         enum: ['Production', 'Sandbox']
     },
+    deviceLine :[
+        {
+            type:Schema.Types.ObjectId,
+            ref: "DeviceLine"
+
+        }
+    ],
+    userId: {
+        type:Schema.Types.ObjectId,
+        ref: "User"
+    },
 
 
 
@@ -55,4 +67,4 @@ const CloverConfigSchema = mongoose.Schema({
      timestamps: true 
 });
 
-// module.exports = mongoose.model('CloverConfig',CloverConfigSchema);
+module.exports = mongoose.model('CloverConfig',CloverConfigSchema);

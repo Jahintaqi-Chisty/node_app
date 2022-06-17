@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const validator = require('validator');
+const {Schema} = require("mongoose");
 
 const UserSchema = mongoose.Schema({
     firstName: {
@@ -14,7 +15,7 @@ const UserSchema = mongoose.Schema({
         type: String,
         required: true
     },
-    userId: {
+    userName: {
         type: String,
         required: true
     },
@@ -22,6 +23,11 @@ const UserSchema = mongoose.Schema({
             type: Boolean,
             required:true,
             default:true
+    },
+    isAdmin:{
+            type: Boolean,
+            required:true,
+            default:false
     }
     ,
     email:{
@@ -31,7 +37,20 @@ const UserSchema = mongoose.Schema({
             message: '{VALUE} is not a valid email',
             isAsync: false
         }
+    },
+    deviceLine :[
+        {
+            type:Schema.Types.ObjectId,
+            ref: "DeviceLine"
+
+        }
+        ]
+    ,
+    cloverConfig:{
+        type:Schema.Types.ObjectId,
+        ref: "CloverConfig"
     }
+
 
 },
 {
