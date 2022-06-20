@@ -35,9 +35,13 @@ const CloverConfigSchema = mongoose.Schema(
       type: String,
       required: true,
     },
-    cloverServer: {
-      type: String,
-      required: true,
+    cloverAuthCode:{
+         type: String,
+        required: true,
+    },
+     cloverServer: {
+        type: String,
+        required: true,
     },
     state: {
       type: String,

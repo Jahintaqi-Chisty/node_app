@@ -7,6 +7,9 @@ r.get("/get-all", Config.findAll);
 // r.get("/user/:userId", User.findOne);
 //
 r.put("/:configId", Config.update);
+r.get("/clover/authrcv",Config.auth_rec);
+r.post("/:configId/get-access-token",Config.get_access_token)
+
 //
 // r.delete("/user/:userId", User.delete);
 
