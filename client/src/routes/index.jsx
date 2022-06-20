@@ -5,23 +5,31 @@ import Login from "../views/pages/auth/login";
 import Register from "../views/pages/auth/register";
 import Reset from "../views/pages/auth/reset";
 import Dashboard from "../views/pages/dashboard";
+import { ProtectedRoute } from "./ProtectedRoute";
+import { PublicRoute } from "./PublicRoute";
 
 export default function MainRoutes() {
   return useRoutes([
     {
-      path: "/",
+      path: "",
       element: <Layout />,
       children: [
         {
-          index: true,
-          element: <Dashboard />,
+          path: "",
+          element: <ProtectedRoute />,
+          children: [
+            {
+              index: true,
+              element: <Dashboard />,
+            },
+          ],
         },
         {
           path: "auth",
           element: <Outlet />,
           children: [
             {
-              element: <Outlet />,
+              element: <PublicRoute />,
               children: [
                 {
                   path: "login",

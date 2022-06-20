@@ -16,7 +16,7 @@ const Dashboard = () => (
       /
     </h1>
     <div>
-      <button className="p-2 border-0 bg-indigo-500 font-light text-white">
+      <button className="bg-indigo-500 font-light text-white transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 hover:bg-indigo-500 duration-300">
         Get Access Token
       </button>
     </div>

@@ -8,6 +8,7 @@
     "start:dev": "NODE_ENV=development nodemon index.js",
     "dev": "concurrently \"npm run start:dev\" \"npm run client:dev\"",
     "client:dev": "npm start --prefix client",
+    "client:build": "npm run build --prefix client",
     "install:deps": "concurrently \"npm install\" \"npm install --prefix client\" ",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -17,11 +18,10 @@
   "dependencies": {
     "api": "^4.5.1",
     "axios": "^0.27.2",
-    "body-parser": "^1.20.0",
+    "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
-    "ejs": "^3.1.8",
     "express": "^4.18.1",
-    "hbs": "^4.2.0",
+    "jsonwebtoken": "^8.5.1",
     "mongoose": "^6.3.8",
     "morgan": "^1.10.0",
     "validator": "^13.7.0"

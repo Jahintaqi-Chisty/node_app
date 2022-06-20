@@ -2,7 +2,8 @@
 
 ## Add
 
-- react view.
-- layout in react.
-- dummy auth views for login register forget and reset.
-- button for access token.
+- Context for user auth.
+- Public and protected route.
+- Login and register flow with server.
+
+# Server

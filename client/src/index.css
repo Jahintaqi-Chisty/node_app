@@ -1,3 +1,13 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+  button {
+    @apply p-2 border-0 outline-0;
+  }
+
+  input {
+    @apply border-2 p-1 text-lg;
+  }
+}

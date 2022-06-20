@@ -1,0 +1,30 @@
+{
+  "configurations": {
+    "run": {
+      "adapter": "vscode-node",
+      "breakpoints": {
+        "exception": {
+          "all": "N",
+          "uncaught": "N"
+        }
+      },
+      "configuration": {
+        "request": "launch",
+        "protocol": "auto",
+        "stopOnEntry": true,
+        "console": "integratedTerminal",
+        "program": "${workspaceRoot}/server.js",
+        "cwd": "${workspaceRoot}"
+      }
+    },
+    "launch": {
+      "adapter": "chrome",
+      "configuration": {
+        "request": "launch",
+        "url": "http://localhost:3000/",
+        "webRoot": "${workspaceRoot}/www",
+        "runtimeExecutable": "/usr/bin/google-chrome-stable"
+      }
+    }
+  }
+}
