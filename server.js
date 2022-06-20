@@ -31,7 +31,7 @@ mongoose
 
 // Defining Routes
 const apiRouter = require("./app/routes/user.route");
-const CloverConfigRouter = require("./app/routes/colver.config.route");
+const CloverConfigRouter = require("./app/routes/clover.config.route");
 const DeviceLineRouter = require("./app/routes/device.line.route");
 
 // app.use("/", viewRouter);

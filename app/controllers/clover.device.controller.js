@@ -1,4 +1,4 @@
-const CloverConfig = require("../models/colver.config.model");
+const CloverConfig = require("../models/clover.config.model");
 const USER = require("../models/user.model.js");
 const DeviceLine = require("../models/clover.device.model");
 
