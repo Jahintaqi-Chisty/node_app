@@ -2,13 +2,12 @@
 
 ## Add
 
-- Config Context.
-- Axios private api call with auth token.
-- Helper function for title case.
-- Config view form in dashboard.
+- Device list table page.
+- Device context.
 
 ## Update
 
-- Styling for navbar links and buttons.
+- Navbar style.
+- Edit and readonly option in config form.
 
 # Server

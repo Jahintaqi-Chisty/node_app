@@ -11,7 +11,6 @@ export const ConfigContext = createContext();
 
 export const ConfigProvider = ({ children }) => {
   const [config, setConfig] = useState({});
-  const [accessToken, setAccessToken] = useState("");
   const axiosPrivate = useAxiosPrivate();
   // call this function when you want to authenticate the user
   const getConfig = useCallback(async () => {
@@ -28,9 +27,11 @@ export const ConfigProvider = ({ children }) => {
         `/api/config/${configId}/get-access-token`
       );
       console.log(data);
-      setAccessToken(data);
+      if (data) {
+        getConfig();
+      }
     },
-    [setAccessToken, axiosPrivate]
+    [axiosPrivate, getConfig]
   );
 
   const value = useMemo(

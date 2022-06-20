@@ -4,12 +4,14 @@ const Navlink = ({ label, path }) => (
   <NavLink
     to={path}
     className={({ isActive }) =>
-      `p-2 rounded-full transition-all duration-200 delay-180 ease-in-out text-white font-bold ${
-        isActive && "underline"
+      `mx-2 p-3 rounded-full transition-all duration-200 delay-180 ease-in-out border-2 hover:bg-indigo-800 hover:text-white hover:border-indigo-800  ${
+        isActive
+          ? "text-indigo-800 border-indigo-800 "
+          : "text-indigo-800 border-white"
       }`
     }
   >
-    <span className="p-1">{label}</span>
+    {label}
   </NavLink>
 );
 

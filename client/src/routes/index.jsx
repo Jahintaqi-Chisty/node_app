@@ -5,6 +5,7 @@ import Login from "../views/pages/auth/login";
 import Register from "../views/pages/auth/register";
 import Reset from "../views/pages/auth/reset";
 import Dashboard from "../views/pages/dashboard";
+import Devices from "../views/pages/device";
 import { ProtectedRoute } from "./ProtectedRoute";
 import { PublicRoute } from "./PublicRoute";
 
@@ -21,6 +22,10 @@ export default function MainRoutes() {
             {
               index: true,
               element: <Dashboard />,
+            },
+            {
+              path: "devices",
+              element: <Devices />,
             },
           ],
         },
