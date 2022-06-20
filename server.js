@@ -39,10 +39,18 @@ const DeviceLineRouter = require("./app/routes/device.line.route");
 app.use("/api/user", apiRouter);
 app.use("/api/config", CloverConfigRouter);
 app.use("/api/device", DeviceLineRouter);
-// app.use("*", function (req, res) {
-//   console.log("404ing");
-//   res.render("404");
-// });
+
+app.get("/*", (_, res) => {
+  fs.access("client/build/index.html", (err) => {
+    if (err) {
+      console.log(err);
+      res.send("Please, Build the react app!");
+    } else {
+      console.log("found");
+      res.sendFile(path.join(__dirname, "client/build", "index.html"));
+    }
+  });
+});
 
 app.listen(PORT, () => {
   console.log(`Server is listening on port ${PORT}`);
