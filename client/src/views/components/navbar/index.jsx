@@ -12,11 +12,11 @@ const navlinks = [
 
 const Navbar = () => {
   const navigate = useNavigate();
-  const { user } = useAuth();
+  const { user, logout } = useAuth();
   return (
     <div className="flex flex-row justify-between p-3 bg-indigo-500">
       <h1
-        className="cursor-pointer p-2 text-white font-bold"
+        className="cursor-pointer px-2 text-white font-bold text-3xl"
         onClick={() => navigate("/")}
       >
         Clover Cloud
@@ -27,6 +27,14 @@ const Navbar = () => {
           .map(({ path, label }, key) => (
             <Navlink path={path} label={label} key={key} />
           ))}
+        {user && (
+          <button
+            className="bg-white ml-4 rounded-full"
+            onClick={() => logout()}
+          >
+            Logout
+          </button>
+        )}
       </div>
     </div>
   );

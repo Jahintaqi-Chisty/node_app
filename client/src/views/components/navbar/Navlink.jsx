@@ -4,8 +4,8 @@ const Navlink = ({ label, path }) => (
   <NavLink
     to={path}
     className={({ isActive }) =>
-      `p-2 rounded-full transition-all duration-200 delay-180 ease-in-out ${
-        isActive ? "bg-white" : "font-bold text-white"
+      `p-2 rounded-full transition-all duration-200 delay-180 ease-in-out text-white font-bold ${
+        isActive && "underline"
       }`
     }
   >

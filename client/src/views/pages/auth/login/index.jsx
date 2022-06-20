@@ -2,8 +2,8 @@ import Form from "../../../components/inputs/Form";
 import FormLabel from "../../../components/inputs/FormLabel";
 import TextField from "../../../components/inputs/TextFields";
 import { useForm } from "react-hook-form";
-import { Axios } from "../../../../utils/config";
 import { useAuth } from "../../../../hooks/useAuth";
+import { axios } from "../../../../hooks/useAxiosPrivate";
 
 const Login = () => {
   const {
@@ -14,7 +14,7 @@ const Login = () => {
   const { login } = useAuth();
   const onSubmit = async (formData) => {
     try {
-      const { data } = await Axios.post("/api/user/login", formData);
+      const { data } = await axios.post("/api/user/login", formData);
       console.log(data);
       if (data) {
         login(data);

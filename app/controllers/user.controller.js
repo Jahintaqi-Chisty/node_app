@@ -64,9 +64,10 @@ exports.login = async (req, res) => {
     if (user) {
       const isValidPass = await user.comparePassword(req.body.password);
       if (isValidPass) {
-        const { firstName, lastName, email, userName, isAdmin } = user;
+        const { firstName, lastName, email, userName, isAdmin, _id } = user;
         const token = jwt.sign(
           {
+            id: _id,
             firstName,
             lastName,
             email,
@@ -79,6 +80,7 @@ exports.login = async (req, res) => {
           }
         );
         res.send({
+          id: _id,
           firstName,
           lastName,
           userName,
