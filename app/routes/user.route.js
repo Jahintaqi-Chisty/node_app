@@ -6,6 +6,7 @@ r.get("/get-all", User.findAll);
 
 r.get("/:userId", User.findOne);
 
+r.post("/login", User.login);
 //   app.put("/user/:userId", User.update);
 
 r.delete("/:userId", User.delete);

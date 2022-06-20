@@ -1,23 +1,18 @@
 const express = require("express");
 const mongoose = require("mongoose");
-const path = require("path");
-const hbs = require("hbs");
 const logger = require("morgan");
+const path = require("path");
+const fs = require("fs");
+const cors = require("cors");
 
 const app = express();
+let PORT = 8081;
 
+app.use(express.static(path.join(__dirname, "client/build")));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-
-hbs.registerPartials(path.join(__dirname, "app/views/partials"), (err) => {});
-// for (let helper in helpers) {
-//   hbs.registerHelper(helper, helpers[helper]);
-// }
-
-app.set("views", path.join(__dirname, "app/views"));
-app.set("view engine", "hbs");
-
-let PORT = 8080;
+app.use(cors());
+app.use(logger("combined"));
 
 mongoose
   .connect(
@@ -44,9 +39,17 @@ const DeviceLineRouter = require("./app/routes/device.line.route");
 app.use("/api/user", apiRouter);
 app.use("/api/config", CloverConfigRouter);
 app.use("/api/device", DeviceLineRouter);
-app.use("*", function (req, res) {
-  console.log("404ing");
-  res.render("404");
+
+app.get("/*", (_, res) => {
+  fs.access("client/build/index.html", (err) => {
+    if (err) {
+      console.log(err);
+      res.send("Please, Build the react app!");
+    } else {
+      console.log("found");
+      res.sendFile(path.join(__dirname, "client/build", "index.html"));
+    }
+  });
 });
 
 app.listen(PORT, () => {
