@@ -11,11 +11,19 @@ export const DeviceContext = createContext();
 
 export const DeviceProvider = ({ children }) => {
   const [devices, setDevices] = useState([]);
+  const [loading, setLoading] = useState(true);
+
   const axiosPrivate = useAxiosPrivate();
   // call this function when you want to authenticate the user
   const getDevices = useCallback(async () => {
-    const { data } = await axiosPrivate.get("/api/device/get-all");
-    setDevices(data);
+    try {
+      const { data } = await axiosPrivate.get("/api/device/get-all");
+      setDevices(data);
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setLoading(false);
+    }
   }, [setDevices, axiosPrivate]);
 
   // call this function to sign out logged in user
@@ -26,8 +34,9 @@ export const DeviceProvider = ({ children }) => {
       devices,
       getDevices,
       clearDevices,
+      devicesLoading: loading,
     }),
-    [devices, getDevices, clearDevices]
+    [devices, getDevices, clearDevices, loading]
   );
 
   useEffect(() => {
