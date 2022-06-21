@@ -74,10 +74,7 @@ exports.login = async (req, res) => {
             userName,
             isAdmin,
           },
-          "magictoken",
-          {
-            expiresIn: "2h",
-          }
+          "magictoken"
         );
         res.send({
           id: _id,

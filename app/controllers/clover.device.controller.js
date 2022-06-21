@@ -74,11 +74,24 @@ exports.update = async (req, res) => {
   try {
     console.log(req.auth);
     if (req.auth.isAdmin) {
+      const device = await DeviceLine.findOne({ _id: req.params.deviceId });
+      const previousUser = device.userId;
+
       const data = await DeviceLine.updateOne(
         { _id: req.params.deviceId },
         req.body
       );
-      res.send(data);
+      if (data) {
+        await USER.updateOne(
+          { _id: previousUser },
+          { $pull: { deviceLine: device._id } }
+        );
+        await USER.updateOne(
+          { _id: req.body.userId },
+          { $push: { deviceLine: device._id } }
+        );
+      }
+      res.send("updated successfully");
     } else {
       res.send({ message: "You are not authorized" });
     }
