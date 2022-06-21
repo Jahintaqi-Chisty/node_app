@@ -2,7 +2,6 @@
 
 # Server
 
-## Update
+## Add
 
-- User device list update on device user change.
-- JWT token expiration halted temporarily.
+- user and admin validation in device fetch controller.

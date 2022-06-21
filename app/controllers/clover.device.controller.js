@@ -29,16 +29,19 @@ exports.create = async (req, res) => {
 exports.findAll = async (req, res) => {
   try {
     // const user = USER.findById(req.params.userId)
-    // if (user.isAdmin){
-    const data = await DeviceLine.find()
-      .populate("userId")
-      .populate("cloverConfig");
+    if (req.auth.isAdmin) {
+      const data = await DeviceLine.find()
+        .populate("userId")
+        .populate("cloverConfig");
 
-    res.send(data);
-    // }
-    // else {
-    //     res.send({"message": "You are not authorized"})
-    // }
+      res.send(data);
+    } else {
+      const data = await DeviceLine.find({ _id: req.auth.id })
+        .populate("userId")
+        .populate("cloverConfig");
+
+      res.send(data);
+    }
   } catch (err) {
     res.status(500).send({
       message: err.message || "Some error occurred while retrieving messages.",
