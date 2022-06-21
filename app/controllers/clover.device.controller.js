@@ -36,7 +36,7 @@ exports.findAll = async (req, res) => {
 
       res.send(data);
     } else {
-      const data = await DeviceLine.find({ _id: req.auth.id })
+      const data = await DeviceLine.find({ userId: req.auth.id })
         .populate("userId")
         .populate("cloverConfig");
 
