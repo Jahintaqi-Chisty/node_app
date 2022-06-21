@@ -213,29 +213,6 @@ exports.fetch_devices = async (req, res) => {
         fetched_device.push(data.serial);
       }
     }
-
-    // res_data.elements.forEach(async (data) => {
-    //     const deviceObj = await CloverDevices.findOne({deviceId: data.id, serial: data.serial});
-    //     if (!deviceObj) {
-    //         const cloverDevice = new CloverDevices({
-    //             deviceId: data.id,
-    //             model: data.id,
-    //             serial: data.serial,
-    //             secureId: data.secureId,
-    //             buildType: data.buildType,
-    //             deviceTypeName: data.deviceTypeName,
-    //             productName: data.productName,
-    //             pinDisabled: data.pinDisabled,
-    //             offlinePayments: data.offlinePayments,
-    //             offlinePaymentsAll: data.offlinePaymentsAll
-    //         });
-    //
-    //         const res = await cloverDevice.save();
-    //         await CloverConfig.updateOne({_id: req.body.cloverConfig}, {$push: {'deviceLine': data._id}})
-    //         await USER.updateOne({_id: req.body.userId}, {$push: {'deviceLine': data._id}})
-    //         fetched_device.push(data.serial)
-    //     }
-    // })
     res.send({
       sucess: true,
       total: fetched_device.length,
