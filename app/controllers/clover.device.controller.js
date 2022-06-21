@@ -72,19 +72,13 @@ exports.findAll = async (req, res) => {
 //   Update a message identified by the messageId in the request
 exports.update = async (req, res) => {
   try {
-    const user = USER.findById(req.params.userId);
-    if (user.isAdmin) {
+    console.log(req.auth);
+    if (req.auth.isAdmin) {
       const data = await DeviceLine.updateOne(
-        { _id: req.body._id },
-        req.body,
-        (err, data) => {
-          if (err) {
-            throw err;
-          } else {
-            res.send(data);
-          }
-        }
+        { _id: req.params.deviceId },
+        req.body
       );
+      res.send(data);
     } else {
       res.send({ message: "You are not authorized" });
     }
@@ -118,4 +112,3 @@ exports.update = async (req, res) => {
 //         });
 //       });
 //   };
-

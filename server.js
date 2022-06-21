@@ -33,11 +33,12 @@ mongoose
 const apiRouter = require("./app/routes/user.route");
 const CloverConfigRouter = require("./app/routes/clover.config.route");
 const DeviceLineRouter = require("./app/routes/device.line.route");
+const auth = require("./app/middlewares/auth");
 
 // app.use("/", viewRouter);
 app.use("/api/user", apiRouter);
 app.use("/api/config", CloverConfigRouter);
-app.use("/api/device", DeviceLineRouter);
+app.use("/api/device", auth, DeviceLineRouter);
 
 app.get("/*", (_, res) => {
   fs.access("client/build/index.html", (err) => {
