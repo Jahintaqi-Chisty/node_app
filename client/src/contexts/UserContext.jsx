@@ -38,9 +38,5 @@ export const UserProvider = ({ children }) => {
     [users, getUsers, clearUsers, loading]
   );
 
-  useEffect(() => {
-    getUsers();
-  }, [getUsers]);
-
   return <UserContext.Provider value={value}>{children}</UserContext.Provider>;
 };

@@ -1,5 +1,8 @@
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../../hooks/useAuth";
+import { useConfig } from "../../../hooks/useConfig";
+import { useDevice } from "../../../hooks/useDevice";
+import { useUser } from "../../../hooks/useUser";
 import Navlink from "./Navlink";
 
 const navlinks = [
@@ -13,7 +16,16 @@ const navlinks = [
 
 const Navbar = () => {
   const navigate = useNavigate();
+  const { clearUsers } = useUser();
+  const { clearDevices } = useDevice();
+  const { clearConfig } = useConfig();
   const { user, logout } = useAuth();
+  const handleLogout = () => {
+    clearConfig();
+    clearDevices();
+    clearUsers();
+    logout();
+  };
   return (
     <div className="flex flex-row justify-between content-center p-3">
       <h1
@@ -31,7 +43,7 @@ const Navbar = () => {
         {user && (
           <button
             className="bg-indigo-800 text-white p-3 ml-4 rounded"
-            onClick={() => logout()}
+            onClick={handleLogout}
           >
             Logout
           </button>

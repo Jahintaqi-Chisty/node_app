@@ -39,10 +39,6 @@ export const DeviceProvider = ({ children }) => {
     [devices, getDevices, clearDevices, loading]
   );
 
-  useEffect(() => {
-    getDevices();
-  }, [getDevices]);
-
   return (
     <DeviceContext.Provider value={value}>{children}</DeviceContext.Provider>
   );

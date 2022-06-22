@@ -12,32 +12,37 @@ const filterKeys = [
 ];
 
 const ConfigForm = () => {
-  const { config } = useConfig();
+  const { config, configLoading } = useConfig();
   const [edit, setEdit] = useState(false);
+  console.log(config);
   return (
-    <form>
-      {Object.keys(config)
-        .filter((key) => !filterKeys.includes(key))
-        .map((key) => (
-          <div key={key} className="grid gap-4 grid-cols-2 my-2">
-            <label>{toTitleCase(key.replace(/([A-Z])/g, " $1"))}</label>
-            <input defaultValue={config[key]} readOnly={!edit} />
-          </div>
-        ))}
-      <button
-        type="button"
-        className={`${edit ? "bg-red-500" : "bg-gray-100"}`}
-        onClick={() => {
-          if (edit) {
-            console.log("reset");
-          }
-          setEdit((e) => !e);
-        }}
-      >
-        {edit ? "Cancel" : "Edit"}
-      </button>
-      {edit && <button className="bg-indigo-500 ml-2">Submit</button>}
-    </form>
+    <>
+      {!configLoading && (
+        <form>
+          {Object.keys(config)
+            .filter((key) => !filterKeys.includes(key))
+            .map((key) => (
+              <div key={key} className="grid gap-4 grid-cols-2 my-2">
+                <label>{toTitleCase(key.replace(/([A-Z])/g, " $1"))}</label>
+                <input defaultValue={config[key]} readOnly={!edit} />
+              </div>
+            ))}
+          <button
+            type="button"
+            className={`${edit ? "bg-red-500" : "bg-gray-100"}`}
+            onClick={() => {
+              if (edit) {
+                console.log("reset");
+              }
+              setEdit((e) => !e);
+            }}
+          >
+            {edit ? "Cancel" : "Edit"}
+          </button>
+          {edit && <button className="bg-indigo-500 ml-2">Submit</button>}
+        </form>
+      )}
+    </>
   );
 };
 
