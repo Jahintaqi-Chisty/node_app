@@ -7,7 +7,8 @@
     @apply p-2 border-0 outline-0;
   }
 
-  input {
+  input,
+  select {
     @apply border-2 p-1 text-lg;
   }
 }

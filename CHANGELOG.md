@@ -1,7 +1,7 @@
 # View
 
+# Server
+
 ## Update
 
-- Fix for errors in rendering without data.
-
-# Server
+- Pre save and update hook for configs.

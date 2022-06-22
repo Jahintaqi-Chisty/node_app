@@ -1,6 +1,6 @@
-const CloverConfig = require('../models/clover.config.model');
-const USER = require('../models/user.model.js');
-const CloverDevices = require('../models/clover.device.model');
+const CloverConfig = require("../models/clover.config.model");
+const USER = require("../models/user.model.js");
+const CloverDevices = require("../models/clover.device.model");
 const axios = require("axios");
 
 exports.create = async (req, res) => {
@@ -224,4 +224,3 @@ exports.fetch_devices = async (req, res) => {
     });
   }
 };
-
