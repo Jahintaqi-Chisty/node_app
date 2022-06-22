@@ -1,11 +1,18 @@
+import { useEffect } from "react";
 import { useDevice } from "../../../../hooks/useDevice";
+import { useUser } from "../../../../hooks/useUser";
 import { toTitleCase } from "../../../../utils/helperFunctions";
 import { TableCell } from "../../table/TableCell";
 
 const filterKeys = ["_id", "__v", "createdAt", "updatedAt", "userId"];
 
 const DeviceList = () => {
-  const { devices, devicesLoading } = useDevice();
+  const { devices, devicesLoading, getDevices } = useDevice();
+  const { getUsers } = useUser();
+  useEffect(() => {
+    getDevices();
+    getUsers();
+  }, [getDevices, getUsers]);
   return (
     <div className="border-collapse table-fixed text-sm">
       {!devicesLoading && (

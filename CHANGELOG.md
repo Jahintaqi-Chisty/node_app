@@ -1,7 +1,7 @@
 # View
 
+## Update
+
+- Fix for errors in rendering without data.
+
 # Server
-
-## Add
-
-- user and admin validation in device fetch controller.
