@@ -2,6 +2,6 @@
 
 ## Update
 
-- Edit form state changes on wrong action fixed.
+- Assign user error on no default user fixed.
 
 # Server

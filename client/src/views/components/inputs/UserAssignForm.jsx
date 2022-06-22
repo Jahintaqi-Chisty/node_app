@@ -42,7 +42,7 @@ const UserAssignForm = ({ deviceData }) => {
           <div className="flex flex-row flex-nowrap justify-center content-center">
             <select
               id="userId"
-              defaultValue={deviceData.defaultUser._id}
+              defaultValue={deviceData?.defaultUser?._id || ""}
               {...register("userId", { required: true })}
             >
               {!userLoading &&

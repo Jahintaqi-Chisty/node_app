@@ -37,7 +37,7 @@ const ConfigForm = () => {
         `/api/config/${config._id}`,
         formData
       );
-      console.log(data);
+      console.log("data");
       if (data) {
         getConfig();
         setEdit(false);
@@ -90,7 +90,7 @@ const ConfigForm = () => {
                 )}
               </div>
             ))}
-          {console.log(errors)}
+          {!!errors && console.log(errors)}
           {user.isAdmin && (
             <>
               <button
