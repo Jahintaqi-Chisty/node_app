@@ -1,7 +1,7 @@
 # View
 
-## Add
+## Update
 
-- Config update form functions added.
+- Config update form functions error.
 
 # Server

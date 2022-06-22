@@ -1,18 +1,22 @@
 import { useEffect } from "react";
 import { useDevice } from "../../../../hooks/useDevice";
 import { useUser } from "../../../../hooks/useUser";
+import { useAuth } from "../../../../hooks/useAuth";
 import { toTitleCase } from "../../../../utils/helperFunctions";
 import { TableCell } from "../../table/TableCell";
 
 const filterKeys = ["_id", "__v", "createdAt", "updatedAt", "userId"];
 
 const DeviceList = () => {
+  const { user } = useAuth();
   const { devices, devicesLoading, getDevices } = useDevice();
   const { getUsers } = useUser();
   useEffect(() => {
-    getDevices();
-    getUsers();
-  }, [getDevices, getUsers]);
+    if (!!user) {
+      getDevices();
+      getUsers();
+    }
+  }, [getDevices, getUsers, user]);
   return (
     <div className="border-collapse table-fixed text-sm">
       {!devicesLoading && (

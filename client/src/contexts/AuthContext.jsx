@@ -1,4 +1,4 @@
-import { createContext, useCallback, useMemo } from "react";
+import { createContext, useCallback, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useLocalStorage } from "../hooks/useLocalStorage";
 
@@ -6,12 +6,14 @@ export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useLocalStorage("CC_USER", null);
+  const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
   // call this function when you want to authenticate the user
   const login = useCallback(
     async (data) => {
       setUser(data);
+      setLoading(false);
       navigate("/");
     },
     [setUser, navigate]

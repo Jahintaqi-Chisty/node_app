@@ -19,8 +19,10 @@ const useAxiosPrivate = () => {
   useEffect(() => {
     const requestIntercept = axios.interceptors.request.use(
       (config) => {
-        if (!config.headers.Authorization) {
-          config.headers.Authorization = `Bearer ${!!user ? user.token : ""}`;
+        if (!config.headers["Authorization"]) {
+          config.headers["Authorization"] = `Bearer ${
+            !!user ? user.token : ""
+          }`;
         }
         return config;
       },

@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
-import { useForm, useWatch } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import useAxiosPrivate from "../../../../hooks/useAxiosPrivate";
 import { useConfig } from "../../../../hooks/useConfig";
+import { useAuth } from "../../../../hooks/useAuth";
 import { toTitleCase } from "../../../../utils/helperFunctions";
 
 const filterKeys = [
@@ -16,6 +17,7 @@ const filterKeys = [
 const ConfigForm = () => {
   const axiosPrivate = useAxiosPrivate();
   const { config, configLoading, getConfig } = useConfig();
+  const { user } = useAuth();
   const [edit, setEdit] = useState(false);
   const {
     register,
@@ -23,9 +25,8 @@ const ConfigForm = () => {
     formState: { errors },
     watch,
     setValue,
-  } = useForm({
-    defaultValues: config,
-  });
+    reset,
+  } = useForm();
 
   const state = watch("state");
 
@@ -52,10 +53,17 @@ const ConfigForm = () => {
       shouldValidate: true,
     });
   }, [state, setValue, watch]);
-
+  useEffect(() => {
+    if (!!user) {
+      getConfig();
+    }
+  }, [getConfig, user, reset]);
+  useEffect(() => {
+    if (config) reset(config);
+  }, [config, reset]);
   return (
     <>
-      {!configLoading && (
+      {!configLoading && !!config && (
         <form onSubmit={handleSubmit(onSubmit)}>
           {Object.keys(config)
             .filter((key) => !filterKeys.includes(key))
@@ -82,19 +90,23 @@ const ConfigForm = () => {
               </div>
             ))}
           {console.log(errors)}
-          <button
-            type="button"
-            className={`${edit ? "bg-red-500" : "bg-gray-100"}`}
-            onClick={() => {
-              if (edit) {
-                console.log("reset");
-              }
-              setEdit((e) => !e);
-            }}
-          >
-            {edit ? "Cancel" : "Edit"}
-          </button>
-          {edit && <button className="bg-indigo-500 ml-2">Submit</button>}
+          {user.isAdmin && (
+            <>
+              <button
+                type="button"
+                className={`${edit ? "bg-red-500" : "bg-gray-100"}`}
+                onClick={() => {
+                  if (edit) {
+                    console.log("reset");
+                  }
+                  setEdit((e) => !e);
+                }}
+              >
+                {edit ? "Cancel" : "Edit"}
+              </button>
+              {edit && <button className="bg-indigo-500 ml-2">Submit</button>}
+            </>
+          )}
         </form>
       )}
     </>
