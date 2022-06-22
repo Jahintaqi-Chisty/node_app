@@ -2,6 +2,6 @@
 
 ## Update
 
-- Config edit form closes on config update.
+- Edit form state changes on wrong action fixed.
 
 # Server

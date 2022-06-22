@@ -40,6 +40,7 @@ const ConfigForm = () => {
       console.log(data);
       if (data) {
         getConfig();
+        setEdit(false);
       }
     } catch (error) {
       alert(error.message);
@@ -56,7 +57,6 @@ const ConfigForm = () => {
   useEffect(() => {
     if (!!user) {
       getConfig();
-      setEdit(false);
     }
   }, [getConfig, user, reset]);
   useEffect(() => {
