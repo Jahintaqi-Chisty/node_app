@@ -53,9 +53,11 @@ const device_ping = async (req, res) => {
             message: err.response.data || "Some error occurred while retrieving messages.",
         });
         }
-        res.status(500).send({
-            message: err.message || "Some error occurred while retrieving messages.",
-        });
+        else {
+            res.status(500).send({
+                message: err.message || "Some error occurred while retrieving messages.",
+            });
+        }
     }
 };
 
@@ -154,20 +156,21 @@ const make_payment = async (req, res) => {
                 })
             }
             else {
-                const options2 = {
-                url: `${configObj.cloverServer}/connect/v1/device/thank-you`,
-                method: 'POST',
-                headers: {
-                     "Accept": "application/json",
-                    "Content-Type": "application/json",
-                    "Authorization": `Bearer ${configObj.cloverAccessToken}`,
-                    "X-Clover-Device-Id": req.body.deviceId,
-                    "X-POS-ID": req.body.posId,
-                },
-                data: {}
-            };
-                const response2 = await axios(options2);
-                if (response2.status !==200){
+            //     const options2 = {
+            //     url: `${configObj.cloverServer}/connect/v1/device/thank-you`,
+            //     method: 'POST',
+            //     headers: {
+            //          "Accept": "application/json",
+            //         "Content-Type": "application/json",
+            //         "Authorization": `Bearer ${configObj.cloverAccessToken}`,
+            //         "X-Clover-Device-Id": req.body.deviceId,
+            //         "X-POS-ID": req.body.posId,
+            //     },
+            //     data: {}
+            // };
+            //     const response2 = await axios(options2);
+                if (response.status !==200){
+                    throw Error(response.message);
                 }
                 res.status(response.status).send({
                     'status': 'OK',
@@ -274,9 +277,11 @@ const make_refund = async (req, res) => {
             message: err.response.data || "Some error occurred while retrieving messages.",
         });
         }
-        res.status(500).send({
-            message: err.message || "Some error occurred while retrieving messages.",
-        });
+        else {
+            res.status(500).send({
+                message: err.message || "Some error occurred while retrieving messages.",
+            });
+        }
     }
 };
 
