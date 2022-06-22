@@ -19,7 +19,7 @@ const DeviceList = () => {
   }, [getDevices, getUsers, user]);
   return (
     <div className="border-collapse table-fixed text-sm">
-      {!devicesLoading && (
+      {!devicesLoading && !!devices && (
         <>
           {devices.length !== 0 ? (
             <table className="table-auto">
@@ -35,9 +35,11 @@ const DeviceList = () => {
                         {toTitleCase(key.replace(/([A-Z])/g, " $1"))}
                       </th>
                     ))}
-                  <th className="border-b dark:border-slate-600 font-medium p-4 text-left">
-                    Users
-                  </th>
+                  {user.isAdmin && (
+                    <th className="border-b dark:border-slate-600 font-medium p-4 text-left">
+                      Users
+                    </th>
+                  )}
                 </tr>
               </thead>
               <tbody className="bg-white">
@@ -53,14 +55,16 @@ const DeviceList = () => {
                         />
                       ))}
 
-                    <TableCell
-                      className="border-b border-slate-100 dark:border-slate-700 p-4 "
-                      type="user"
-                      content={{
-                        defaultUser: device.userId,
-                        deviceId: device._id,
-                      }}
-                    />
+                    {user.isAdmin && (
+                      <TableCell
+                        className="border-b border-slate-100 dark:border-slate-700 p-4 "
+                        type="user"
+                        content={{
+                          defaultUser: device.userId || null,
+                          deviceId: device._id,
+                        }}
+                      />
+                    )}
                   </tr>
                 ))}
               </tbody>
