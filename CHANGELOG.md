@@ -2,6 +2,6 @@
 
 ## Update
 
-- Config update form functions error.
+- Config edit form closes on config update.
 
 # Server

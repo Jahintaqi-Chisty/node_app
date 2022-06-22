@@ -56,6 +56,7 @@ const ConfigForm = () => {
   useEffect(() => {
     if (!!user) {
       getConfig();
+      setEdit(false);
     }
   }, [getConfig, user, reset]);
   useEffect(() => {
