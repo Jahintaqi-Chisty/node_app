@@ -34,7 +34,6 @@ export const ConfigProvider = ({ children }) => {
       const { data } = await axiosPrivate.post(
         `/api/config/${configId}/get-access-token`
       );
-      console.log(data);
       if (data) {
         getConfig();
       }

@@ -1,5 +1,6 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useForm, useWatch } from "react-hook-form";
+import useAxiosPrivate from "../../../../hooks/useAxiosPrivate";
 import { useConfig } from "../../../../hooks/useConfig";
 import { toTitleCase } from "../../../../utils/helperFunctions";
 
@@ -13,32 +14,45 @@ const filterKeys = [
 ];
 
 const ConfigForm = () => {
-  const { config, configLoading } = useConfig();
+  const axiosPrivate = useAxiosPrivate();
+  const { config, configLoading, getConfig } = useConfig();
   const [edit, setEdit] = useState(false);
   const {
     register,
     handleSubmit,
     formState: { errors },
     watch,
+    setValue,
   } = useForm({
-    defaultValues: {
-      ...config,
-      cloverServer:
-        config.state === "Production" ? config.prodUrl : config.testUrl,
-    },
+    defaultValues: config,
   });
-  console.log(config);
 
-  const testUrl = watch("testUrl");
-  const prodUrl = watch("prodUrl");
-  const cloverServer = watch("cloverServer");
+  const state = watch("state");
+
   const onSubmit = async (formData) => {
     try {
       console.log(formData);
+      const { data } = await axiosPrivate.put(
+        `/api/config/${config._id}`,
+        formData
+      );
+      console.log(data);
+      if (data) {
+        getConfig();
+      }
     } catch (error) {
       alert(error.message);
     }
   };
+
+  useEffect(() => {
+    const testUrl = watch("testUrl");
+    const prodUrl = watch("prodUrl");
+    setValue("cloverServer", state === "Production" ? prodUrl : testUrl, {
+      shouldValidate: true,
+    });
+  }, [state, setValue, watch]);
+
   return (
     <>
       {!configLoading && (
@@ -49,24 +63,21 @@ const ConfigForm = () => {
               <div key={key} className="grid gap-4 grid-cols-2 my-2">
                 <label>{toTitleCase(key.replace(/([A-Z])/g, " $1"))}</label>
                 {key === "state" ? (
-                  <select {...register(key, { required: true })}>
+                  <select
+                    {...register(key, { required: true })}
+                    style={{
+                      touchAction: edit ? "auto" : "none",
+                      pointerEvents: edit ? "auto" : "none",
+                    }}
+                  >
                     <option label="Production" value="Production" />
                     <option label="Sandbox" value="Sandbox" />
                   </select>
                 ) : (
-                  <>
-                    {key === "cloverServer" ? (
-                      <input
-                        {...register(key, { required: true })}
-                        readOnly={!edit}
-                      />
-                    ) : (
-                      <input
-                        {...register(key, { required: true })}
-                        readOnly={!edit}
-                      />
-                    )}
-                  </>
+                  <input
+                    {...register(key, { required: true })}
+                    readOnly={key === "cloverServer" ? true : !edit}
+                  />
                 )}
               </div>
             ))}

@@ -1,7 +1,7 @@
 # View
 
+## Add
+
+- Config update form functions added.
+
 # Server
-
-## Update
-
-- Pre save and update hook for configs.

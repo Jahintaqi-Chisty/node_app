@@ -87,8 +87,7 @@ exports.auth_rec = async (req, res) => {
 //   Update a message identified by the messageId in the request
 exports.update = async (req, res) => {
   try {
-    const user = await USER.findById(req.query.userId);
-    if (user.isAdmin) {
+    if (req.auth.isAdmin) {
       const data = await CloverConfig.updateOne(
         { _id: req.params.configId },
         req.body,
