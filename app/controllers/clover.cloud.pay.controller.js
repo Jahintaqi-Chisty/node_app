@@ -149,12 +149,31 @@ const make_payment = async (req, res) => {
             };
             const response = await axios(options);
             if (response.status !== 200) {
-                throw Error(response.message);
+                res.status(response.status).send({
+                    message: response.data,
+                })
             }
-            res.status(response.status).send({
-                'status':'OK',
-                'data': response.data
-            })
+            else {
+                const options2 = {
+                url: `${configObj.cloverServer}/connect/v1/device/thank-you`,
+                method: 'POST',
+                headers: {
+                     "Accept": "application/json",
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${configObj.cloverAccessToken}`,
+                    "X-Clover-Device-Id": req.body.deviceId,
+                    "X-POS-ID": req.body.posId,
+                },
+                data: {}
+            };
+                const response2 = await axios(options2);
+                if (response2.status !==200){
+                }
+                res.status(response.status).send({
+                    'status': 'OK',
+                    'data': response.data
+                })
+            }
         }
         else{
             throw Error("No Configuration Found!");
@@ -216,10 +235,30 @@ const make_refund = async (req, res) => {
             if (response.status !== 200) {
                 throw Error(response.message);
             }
-            res.status(response.status).send({
-                'status':'OK',
-                'data': response.data
-            })
+            else {
+                const options2 = {
+                url: `${configObj.cloverServer}/connect/v1/device/thank-you`,
+                method: 'POST',
+                headers: {
+                     "Accept": "application/json",
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${configObj.cloverAccessToken}`,
+                    "X-Clover-Device-Id": req.body.deviceId,
+                    "X-POS-ID": req.body.posId,
+                },
+                data: {}
+            };
+                const response2 = await axios(options2);
+                if (response2.status !==200){
+                }
+                res.status(response.status).send({
+                    'status': 'OK',
+                    'data': response.data
+                })
+
+
+
+            }
         }
         else{
             throw Error("No Configuration Found!");
