@@ -5,6 +5,7 @@ import {
   useMemo,
   useState,
 } from "react";
+import { get } from "react-hook-form";
 import useAxiosPrivate from "../hooks/useAxiosPrivate";
 
 export const DeviceContext = createContext();
@@ -27,7 +28,7 @@ export const DeviceProvider = ({ children }) => {
   }, [setDevices, axiosPrivate]);
 
   // call this function to sign out logged in user
-  const clearDevices = useCallback(() => setDevices(), [setDevices]);
+  const clearDevices = useCallback(() => setDevices([]), [setDevices]);
 
   const value = useMemo(
     () => ({

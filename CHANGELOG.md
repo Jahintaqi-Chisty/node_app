@@ -2,6 +2,7 @@
 
 ## Update
 
-- Assign user error on no default user fixed.
+- Fixed not loading devices on reload.
+- Checkbox icon for boolean fields in device list table and confog form
 
 # Server

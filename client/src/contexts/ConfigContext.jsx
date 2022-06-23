@@ -27,7 +27,7 @@ export const ConfigProvider = ({ children }) => {
   }, [setConfig, axiosPrivate]);
 
   // call this function to sign out logged in user
-  const clearConfig = useCallback(() => setConfig(), [setConfig]);
+  const clearConfig = useCallback(() => setConfig({}), [setConfig]);
 
   const getAccessToken = useCallback(
     async (configId) => {

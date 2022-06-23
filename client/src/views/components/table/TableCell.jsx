@@ -4,10 +4,14 @@
 //         object: <td {...otherProps}>Object</td>
 // })
 
+import { FaCheck, FaTimes } from "react-icons/fa";
 import UserAssignForm from "../inputs/UserAssignForm";
 
-export const BooleanCell = ({ content, positive = "Yes", negative = "No" }) =>
-  content ? positive : negative;
+export const BooleanCell = ({
+  content,
+  positive = <FaCheck style={{ color: "green" }} />,
+  negative = <FaTimes style={{ color: "red" }} />,
+}) => (content ? positive : negative);
 
 export const TableCell = ({ content, type = "default", ...otherProps }) => {
   if (type === "default") {

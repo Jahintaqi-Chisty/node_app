@@ -1,4 +1,10 @@
-import { createContext, useCallback, useMemo, useState } from "react";
+import {
+  createContext,
+  useCallback,
+  useEffect,
+  useMemo,
+  useState,
+} from "react";
 import { useNavigate } from "react-router-dom";
 import { useLocalStorage } from "../hooks/useLocalStorage";
 
@@ -6,14 +12,13 @@ export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useLocalStorage("CC_USER", null);
-  const [loading, setLoading] = useState(true);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
   const navigate = useNavigate();
 
   // call this function when you want to authenticate the user
   const login = useCallback(
-    async (data) => {
+    (data) => {
       setUser(data);
-      setLoading(false);
       navigate("/");
     },
     [setUser, navigate]
@@ -30,8 +35,16 @@ export const AuthProvider = ({ children }) => {
       user,
       login,
       logout,
+      isAuthenticated,
     }),
-    [user, login, logout]
+    [user, login, logout, isAuthenticated]
   );
+
+  useEffect(() => {
+    if (user && user?.token) {
+      setIsAuthenticated(true);
+    }
+  }, [user]);
+
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };

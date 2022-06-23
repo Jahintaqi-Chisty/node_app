@@ -26,7 +26,7 @@ export const UserProvider = ({ children }) => {
   }, [setUsers, axiosPrivate]);
 
   // call this function to sign out logged in user
-  const clearUsers = useCallback(() => setUsers(), [setUsers]);
+  const clearUsers = useCallback(() => setUsers([]), [setUsers]);
 
   const value = useMemo(
     () => ({

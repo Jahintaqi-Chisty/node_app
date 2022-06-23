@@ -4,6 +4,7 @@ import useAxiosPrivate from "../../../../hooks/useAxiosPrivate";
 import { useConfig } from "../../../../hooks/useConfig";
 import { useAuth } from "../../../../hooks/useAuth";
 import { toTitleCase } from "../../../../utils/helperFunctions";
+import { FaCheck, FaTimes } from "react-icons/fa";
 
 const filterKeys = [
   "_id",
@@ -17,7 +18,7 @@ const filterKeys = [
 const ConfigForm = () => {
   const axiosPrivate = useAxiosPrivate();
   const { config, configLoading, getConfig } = useConfig();
-  const { user } = useAuth();
+  const { user, isAuthenticated } = useAuth();
   const [edit, setEdit] = useState(false);
   const {
     register,
@@ -32,12 +33,10 @@ const ConfigForm = () => {
 
   const onSubmit = async (formData) => {
     try {
-      console.log(formData);
       const { data } = await axiosPrivate.put(
         `/api/config/${config._id}`,
         formData
       );
-      console.log("data");
       if (data) {
         getConfig();
         setEdit(false);
@@ -55,10 +54,10 @@ const ConfigForm = () => {
     });
   }, [state, setValue, watch]);
   useEffect(() => {
-    if (!!user) {
+    if (isAuthenticated) {
       getConfig();
     }
-  }, [getConfig, user, reset]);
+  }, [getConfig, isAuthenticated, reset]);
   useEffect(() => {
     if (config) reset(config);
   }, [config, reset]);
@@ -69,7 +68,10 @@ const ConfigForm = () => {
           {Object.keys(config)
             .filter((key) => !filterKeys.includes(key))
             .map((key) => (
-              <div key={key} className="grid gap-4 grid-cols-2 my-2">
+              <div
+                key={key}
+                className="grid gap-4 grid-cols-2 place-items-stretch my-2"
+              >
                 <label>{toTitleCase(key.replace(/([A-Z])/g, " $1"))}</label>
                 {key === "state" ? (
                   <select
@@ -82,24 +84,31 @@ const ConfigForm = () => {
                     <option label="Production" value="Production" />
                     <option label="Sandbox" value="Sandbox" />
                   </select>
+                ) : key === "isAccessTokenLoaded" ? (
+                  <p>
+                    {config[key] ? (
+                      <FaCheck style={{ color: "green" }} />
+                    ) : (
+                      <FaTimes style={{ color: "red" }} />
+                    )}
+                  </p>
                 ) : (
                   <input
+                    className={typeof config[key] === "boolean" ? "my-6" : ""}
+                    placeholder={toTitleCase(key.replace(/([A-Z])/g, " $1"))}
                     {...register(key, { required: true })}
                     readOnly={key === "cloverServer" ? true : !edit}
                   />
                 )}
               </div>
             ))}
-          {!!errors && console.log(errors)}
           {user.isAdmin && (
             <>
               <button
                 type="button"
                 className={`${edit ? "bg-red-500" : "bg-gray-100"}`}
                 onClick={() => {
-                  if (edit) {
-                    console.log("reset");
-                  }
+                  reset(config);
                   setEdit((e) => !e);
                 }}
               >
