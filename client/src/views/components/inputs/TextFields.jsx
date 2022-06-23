@@ -6,7 +6,7 @@ const TextField = forwardRef(({ label, ...otherProps }, ref) => (
     <input
       ref={ref}
       {...otherProps}
-      className="outline-indigo-500 border-indigo-200 rounded-sm"
+      className=" p-2 text-indigo-700 border-b-2 border-indigo-500 focus:bg-gray-300 outline-none"
     />
   </div>
 ));

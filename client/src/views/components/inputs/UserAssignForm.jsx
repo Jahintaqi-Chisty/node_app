@@ -61,10 +61,17 @@ const UserAssignForm = ({ deviceData }) => {
                 ))}
             </select>
 
-            <button type="reset" onClick={() => setEdit(false)}>
+            <button
+              className="bg-red-500 text-white border rounded"
+              type="reset"
+              onClick={() => setEdit(false)}
+            >
               <GiCancel />
             </button>
-            <button type="submit">
+            <button
+              className="bg-indigo-500 text-white border rounded"
+              type="submit"
+            >
               <BiSend />
             </button>
           </div>
@@ -75,7 +82,7 @@ const UserAssignForm = ({ deviceData }) => {
             <span>{`${deviceData.defaultUser.firstName} ${deviceData.defaultUser.lastName}`}</span>
           )}
           <button
-            className="bg-indigo-500 text-white"
+            className="bg-indigo-500 text-white border rounded"
             onClick={() => setEdit(true)}
           >
             <FaEdit />

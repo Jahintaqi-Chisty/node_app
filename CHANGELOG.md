@@ -1,8 +1,12 @@
 # View
 
+## Add
+
+- Get access token and get device list button
+
 ## Update
 
-- Fixed not loading devices on reload.
-- Checkbox icon for boolean fields in device list table and confog form
+- Form design revamped.
+- Table design revamped.
 
 # Server

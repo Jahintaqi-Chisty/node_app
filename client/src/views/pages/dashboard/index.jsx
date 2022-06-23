@@ -1,7 +1,9 @@
 import { NavLink } from "react-router-dom";
+import { useConfig } from "../../../hooks/useConfig";
 import ConfigForm from "../../components/dashboard/config/ConfigForm";
 
 const Dashboard = () => {
+  const { config, getAccessToken } = useConfig();
   return (
     <div>
       <h1 className="my-2">
@@ -18,12 +20,15 @@ const Dashboard = () => {
         /
       </h1>
       <div>
-        {/* <button
-              className="bg-indigo-500 font-light text-white transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 hover:bg-indigo-500 duration-300"
-              onClick={() => getAccessToken(config._id)}
-            >
-              Get Access Token
-            </button> */}
+        <button
+          className="bg-indigo-500 font-light text-white transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 hover:bg-indigo-500 duration-300"
+          onClick={() => getAccessToken(config._id)}
+        >
+          Get Access Token
+        </button>
+        <button className="bg-indigo-500 font-light text-white transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 hover:bg-indigo-500 duration-300 ml-3">
+          Get Device List
+        </button>
       </div>
       <ConfigForm />
     </div>

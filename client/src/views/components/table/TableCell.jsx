@@ -9,8 +9,16 @@ import UserAssignForm from "../inputs/UserAssignForm";
 
 export const BooleanCell = ({
   content,
-  positive = <FaCheck style={{ color: "green" }} />,
-  negative = <FaTimes style={{ color: "red" }} />,
+  positive = (
+    <span className="text-green-500">
+      <FaCheck />
+    </span>
+  ),
+  negative = (
+    <span className="text-red-500">
+      <FaTimes />
+    </span>
+  ),
 }) => (content ? positive : negative);
 
 export const TableCell = ({ content, type = "default", ...otherProps }) => {

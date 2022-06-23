@@ -64,7 +64,10 @@ const ConfigForm = () => {
   return (
     <>
       {!configLoading && !!config && (
-        <form onSubmit={handleSubmit(onSubmit)}>
+        <form
+          className="shadow-xl rounded border bg-grey-100 mt-6 p-6"
+          onSubmit={handleSubmit(onSubmit)}
+        >
           {Object.keys(config)
             .filter((key) => !filterKeys.includes(key))
             .map((key) => (
@@ -72,9 +75,12 @@ const ConfigForm = () => {
                 key={key}
                 className="grid gap-4 grid-cols-2 place-items-stretch my-2"
               >
-                <label>{toTitleCase(key.replace(/([A-Z])/g, " $1"))}</label>
+                <label className="block mb-2 text-indigo-500">
+                  {toTitleCase(key.replace(/([A-Z])/g, " $1"))}
+                </label>
                 {key === "state" ? (
                   <select
+                    className="p-2 text-indigo-700 border-b-2 border-indigo-500 focus:bg-gray-300 outline-none"
                     {...register(key, { required: true })}
                     style={{
                       touchAction: edit ? "auto" : "none",
@@ -94,7 +100,9 @@ const ConfigForm = () => {
                   </p>
                 ) : (
                   <input
-                    className={typeof config[key] === "boolean" ? "my-6" : ""}
+                    className={`${
+                      typeof config[key] === "boolean" ? "my-6" : ""
+                    } p-2 text-indigo-700 border-b-2 border-indigo-500 focus:bg-gray-300 outline-none`}
                     placeholder={toTitleCase(key.replace(/([A-Z])/g, " $1"))}
                     {...register(key, { required: true })}
                     readOnly={key === "cloverServer" ? true : !edit}

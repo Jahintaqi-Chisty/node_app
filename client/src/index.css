@@ -9,6 +9,6 @@
 
   input,
   select {
-    @apply border-2 p-1 text-lg;
+    @apply p-1 text-lg;
   }
 }

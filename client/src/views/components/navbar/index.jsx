@@ -42,7 +42,7 @@ const Navbar = () => {
           ))}
         {user && (
           <button
-            className="bg-indigo-800 text-white p-3 ml-4 rounded"
+            className="bg-indigo-800 text-white p-3 ml-4 rounded transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 duration-300"
             onClick={handleLogout}
           >
             Logout
