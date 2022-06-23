@@ -4,7 +4,8 @@ import useAxiosPrivate from "../../../../hooks/useAxiosPrivate";
 import { useConfig } from "../../../../hooks/useConfig";
 import { useAuth } from "../../../../hooks/useAuth";
 import { toTitleCase } from "../../../../utils/helperFunctions";
-import { FaCheck, FaTimes } from "react-icons/fa";
+import { FaCheck, FaEdit, FaTimes } from "react-icons/fa";
+import { BiSend } from "react-icons/bi";
 
 const filterKeys = [
   "_id",
@@ -65,7 +66,7 @@ const ConfigForm = () => {
     <>
       {!configLoading && !!config && (
         <form
-          className="shadow-xl rounded border bg-grey-100 mt-6 p-6"
+          className="shadow-xl rounded border bg-gray-100 mt-6 p-6"
           onSubmit={handleSubmit(onSubmit)}
         >
           {Object.keys(config)
@@ -114,15 +115,33 @@ const ConfigForm = () => {
             <>
               <button
                 type="button"
-                className={`${edit ? "bg-red-500" : "bg-gray-100"}`}
+                className={`${
+                  edit
+                    ? "border-red-500 text-red-500"
+                    : "bg-slate-100 text-indigo-500 border-indigo-500"
+                } border-2 rounded-lg p-3`}
                 onClick={() => {
                   reset(config);
                   setEdit((e) => !e);
                 }}
               >
-                {edit ? "Cancel" : "Edit"}
+                <span className="flex justify-center items-center">
+                  {edit ? (
+                    <FaTimes className="mr-2" />
+                  ) : (
+                    <FaEdit className="mr-2" />
+                  )}
+                  <p>{edit ? "Cancel" : "Edit"}</p>
+                </span>
               </button>
-              {edit && <button className="bg-indigo-500 ml-2">Submit</button>}
+              {edit && (
+                <button className="bg-indigo-500 text-slate-100 border-2 border-indigo-500 p-3 rounded-lg ml-2">
+                  <span className="flex justify-center items-center">
+                    <BiSend className="mr-2" />
+                    <p>Submit</p>
+                  </span>
+                </button>
+              )}
             </>
           )}
         </form>

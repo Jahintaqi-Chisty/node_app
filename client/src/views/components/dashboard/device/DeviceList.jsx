@@ -21,20 +21,22 @@ const DeviceList = () => {
           <>
             {devices.length !== 0 ? (
               <table>
-                <thead className="bg-gray-50">
+                <thead className="bg-indigo-600">
                   <tr>
                     {Object.keys(devices[0])
                       .filter((key) => !filterKeys.includes(key))
                       .map((key) => (
                         <th
                           key={key}
-                          className="px-6 py-2 text-xs text-gray-500"
+                          className="px-6 py-2 text-xs text-slate-100"
                         >
                           {toTitleCase(key.replace(/([A-Z])/g, " $1"))}
                         </th>
                       ))}
                     {user.isAdmin && (
-                      <th className="px-6 py-2 text-xs text-gray-500">Users</th>
+                      <th className="px-6 py-2 text-xs text-slate-100">
+                        Users
+                      </th>
                     )}
                   </tr>
                 </thead>

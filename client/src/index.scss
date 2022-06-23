@@ -1,0 +1,25 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  html {
+    @apply bg-white;
+  }
+  body {
+    @apply bg-gradient-to-r from-syncoria-500 to-syncoria-400 skew-y-[-10deg] py-[200px] mt-[-200px] h-[44rem];
+    
+    #root {
+      @apply skew-y-[10deg];
+    }
+  }
+  
+  button {
+    @apply p-2 border-0 outline-0;
+  }
+
+  input,
+  select {
+    @apply p-1 text-lg;
+  }
+}

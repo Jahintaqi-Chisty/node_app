@@ -2,11 +2,12 @@
 
 ## Add
 
-- Get access token and get device list button
+- Icons for buttons and links.
+- Visual flares for backgroud.
+- Get device list button function.
 
 ## Update
 
-- Form design revamped.
-- Table design revamped.
+- Revamp colors
 
 # Server

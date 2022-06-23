@@ -41,6 +41,18 @@ export const ConfigProvider = ({ children }) => {
     [axiosPrivate, getConfig]
   );
 
+  const fetchDevices = useCallback(
+    async (configId) => {
+      const { data } = await axiosPrivate.post(
+        `/api/config/${configId}/fetch_devices`
+      );
+      if (data) {
+        getConfig();
+      }
+    },
+    [axiosPrivate, getConfig]
+  );
+
   const value = useMemo(
     () => ({
       config,
@@ -48,8 +60,9 @@ export const ConfigProvider = ({ children }) => {
       clearConfig,
       getAccessToken,
       configLoading: loading,
+      fetchDevices,
     }),
-    [config, getConfig, clearConfig, getAccessToken, loading]
+    [config, getConfig, clearConfig, getAccessToken, fetchDevices, loading]
   );
 
   return (
