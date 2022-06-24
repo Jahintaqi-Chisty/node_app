@@ -1,13 +1,14 @@
-# View
+# Changelog
 
-## Add
+## View
 
-- Icons for buttons and links.
-- Visual flares for backgroud.
-- Get device list button function.
+### Add
 
-## Update
+- Error snackbars for errors
+- Error store in context
 
-- Revamp colors
+## Server
 
-# Server
+### Add
+
+- Seperate 404 routes for all api routes.

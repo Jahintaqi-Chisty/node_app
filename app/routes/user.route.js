@@ -12,4 +12,9 @@ r.post("/login", User.login);
 
 r.delete("/:userId", User.delete);
 
+// dont write any routes/code below this or this route will be ignored as 404.
+r.all("*", (_, res) => {
+  res.status(404).send({ message: "Not Found" });
+});
+
 module.exports = r;

@@ -4,6 +4,7 @@ import TextField from "../../../components/inputs/TextFields";
 import { useForm } from "react-hook-form";
 import { Axios } from "../../../../utils/config";
 import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 
 const Register = () => {
   const {
@@ -24,6 +25,10 @@ const Register = () => {
       alert(error.message);
     }
   };
+
+  useEffect(() => {
+    alert(JSON.stringify(errors));
+  }, [errors]);
   return (
     <Form onSubmit={handleSubmit(onSubmit)}>
       <FormLabel label="Register" />
@@ -69,7 +74,6 @@ const Register = () => {
       <button className="bg-indigo-500 text-white" type="submit">
         Register
       </button>
-      {console.log(errors)}
     </Form>
   );
 };

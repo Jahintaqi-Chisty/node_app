@@ -10,7 +10,7 @@
     @apply bg-gradient-to-r from-syncoria-500 to-syncoria-400 skew-y-[-10deg] py-[200px] mt-[-200px] h-[44rem];
     
     #root {
-      @apply skew-y-[10deg];
+      @apply skew-y-[10deg] min-h-screen;
     }
   }
   

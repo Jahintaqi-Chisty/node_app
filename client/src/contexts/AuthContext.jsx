@@ -13,6 +13,7 @@ export const AuthContext = createContext();
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useLocalStorage("CC_USER", null);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+
   const navigate = useNavigate();
 
   // call this function when you want to authenticate the user

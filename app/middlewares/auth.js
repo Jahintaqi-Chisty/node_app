@@ -9,7 +9,6 @@ module.exports = (req, res, next) => {
       const decodedToken = jwt.verify(token, "magictoken");
       const user = decodedToken;
       req.auth = user;
-      console.log(user);
       next();
     }
   } catch (error) {

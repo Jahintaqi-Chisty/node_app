@@ -4,6 +4,7 @@ import TextField from "../../../components/inputs/TextFields";
 import { useForm } from "react-hook-form";
 import { useAuth } from "../../../../hooks/useAuth";
 import { axios } from "../../../../hooks/useAxiosPrivate";
+import { useEffect } from "react";
 
 const Login = () => {
   const {
@@ -15,7 +16,6 @@ const Login = () => {
   const onSubmit = async (formData) => {
     try {
       const { data } = await axios.post("/api/user/login", formData);
-      console.log(data);
       if (data) {
         login(data);
       }
@@ -23,6 +23,10 @@ const Login = () => {
       alert(error.message);
     }
   };
+
+  useEffect(() => {
+    alert(JSON.stringify(errors));
+  }, [errors]);
 
   return (
     <Form onSubmit={handleSubmit(onSubmit)}>
@@ -41,7 +45,6 @@ const Login = () => {
       <button className="bg-indigo-500 text-white" type="submit">
         Login
       </button>
-      {console.log(errors)}
     </Form>
   );
 };
