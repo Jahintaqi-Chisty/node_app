@@ -156,10 +156,16 @@ exports.get_access_token = async (req, res) => {
     } else {
       throw Error("Not Found!!");
     }
-  } catch (e) {
-    res.status(500).send({
-      message: e.message || "Some error occurred while retrieving messages.",
-    });
+  } catch (err) {
+    if (err.hasOwnProperty('response')) {
+            res.status(err.response.status).send({
+                message: err.response.data,
+            });
+        } else {
+            res.status(500).send({
+                message: err.message || "Some error occurred while retrieving messages.",
+            });
+        }
   }
 };
 
